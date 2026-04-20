@@ -4,10 +4,86 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
+}
+
+model Owner {
+  id    Int    @id @default(autoincrement())
+  name  String
+  email String @unique
+  phone String
+
+  pets Pet[]
+}
+
+model Pet {
+  id      Int     @id @default(autoincrement())
+  name    String
+  species String
+  breed   String?
+  age     Int
+
+  ownerId Int
+  owner   Owner @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  stays Stay[]
+}
+
+model Room {
+  id          Int    @id @default(autoincrement())
+  number      Int
+  type        String
+  pricePerDay Float
+  status      String
+
+  stays Stay[]
+}
+
+model Stay {
+  id        Int      @id @default(autoincrement())
+  startDate DateTime
+  endDate   DateTime
+  status    String
+
+  petId Int
+  pet   Pet @relation(fields: [petId], references: [id], onDelete: Cascade)
+
+  roomId Int
+  room   Room @relation(fields: [roomId], references: [id])
+
+  services StayService[]
+  payment  Payment?
+}
+
+model Service {
+  id    Int    @id @default(autoincrement())
+  name  String
+  price Float
+
+  stays StayService[]
+}
+
+model StayService {
+  stayId    Int
+  serviceId Int
+
+  stay    Stay    @relation(fields: [stayId], references: [id], onDelete: Cascade)
+  service Service @relation(fields: [serviceId], references: [id])
+
+  @@id([stayId, serviceId]) // relacja n:m
+}
+
+model Payment {
+  id     Int       @id @default(autoincrement())
+  amount Float
+  status String
+  paidAt DateTime?
+
+  stayId Int  @unique
+  stay   Stay @relation(fields: [stayId], references: [id])
 }
