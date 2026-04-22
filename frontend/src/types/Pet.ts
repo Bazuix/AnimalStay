@@ -5,4 +5,6 @@ export interface Pet {
     breed?: string;
     age: number;
     ownerId: number;
+    owner?: { id: number; name: string; email: string; phone: string };
+
 }

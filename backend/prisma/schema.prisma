@@ -49,9 +49,12 @@ model Stay {
   startDate DateTime
   endDate   DateTime
   status    String
-
-  petId Int
-  pet   Pet @relation(fields: [petId], references: [id], onDelete: Cascade)
+  notes     String?
+  needsMeds Boolean  @default(false)
+  needsWalk Boolean  @default(true)
+  medsInfo  String?
+  petId     Int
+  pet       Pet      @relation(fields: [petId], references: [id], onDelete: Cascade)
 
   roomId Int
   room   Room @relation(fields: [roomId], references: [id])
@@ -81,9 +84,16 @@ model StayService {
 model Payment {
   id     Int       @id @default(autoincrement())
   amount Float
-  status String
+  status String    @default("pending")
   paidAt DateTime?
 
   stayId Int  @unique
   stay   Stay @relation(fields: [stayId], references: [id])
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+  role     String @default("worker")
 }
