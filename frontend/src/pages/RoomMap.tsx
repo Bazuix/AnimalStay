@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import api from "../api/axios";
+import DatePicker from "../components/DatePicker";
 
 interface StayOnRoom {
     id: number;
@@ -118,27 +119,23 @@ export default function RoomMap() {
             {/* ── Date Picker ── */}
             <div className="rm-filter-bar card">
                 <div className="rm-date-group">
-                    <div className="form-group">
-                        <label>From date</label>
-                        <input
-                            type="date"
-                            value={startDate}
-                            onChange={(e) => {
-                                setStartDate(e.target.value);
-                                if (e.target.value > endDate) setEndDate(e.target.value);
-                            }}
-                        />
-                    </div>
+                    <DatePicker
+                        label="From date"
+                        value={startDate}
+                        onChange={(d) => {
+                            setStartDate(d);
+                            if (d > endDate) setEndDate(d);
+                        }}
+                        placeholder="Select start…"
+                    />
                     <div className="rm-date-sep">→</div>
-                    <div className="form-group">
-                        <label>To date</label>
-                        <input
-                            type="date"
-                            value={endDate}
-                            min={startDate}
-                            onChange={(e) => setEndDate(e.target.value)}
-                        />
-                    </div>
+                    <DatePicker
+                        label="To date"
+                        value={endDate}
+                        min={startDate}
+                        onChange={(d) => setEndDate(d)}
+                        placeholder="Select end…"
+                    />
                     <button className="btn primary sm" onClick={fetchRooms} style={{ alignSelf: "flex-end" }}>
                         Search
                     </button>

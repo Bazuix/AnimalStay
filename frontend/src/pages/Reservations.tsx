@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 import type { Stay } from "../types/Stay";
+import DatePicker from "../components/DatePicker";
 
 interface Pet { id: number; name: string; species: string; owner: { name: string } }
 interface Room { id: number; number: number; type: string; pricePerDay: number; status: string }
@@ -79,8 +80,12 @@ const Reservations = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError("");
+        if (!form.startDate || !form.endDate) {
+            setError("Please select both check-in and check-out dates");
+            return;
+        }
         if (new Date(form.endDate) <= new Date(form.startDate)) {
-            setError("End date must be after start date");
+            setError("Check-out must be after check-in");
             return;
         }
         if (form.petId === 0 || form.roomId === 0) {
@@ -226,16 +231,20 @@ const Reservations = () => {
                             </div>
 
                             <div className="form-row">
-                                <div className="form-group">
-                                    <label>Check-in Date *</label>
-                                    <input type="date" required min={today} value={form.startDate}
-                                           onChange={(e) => setForm({ ...form, startDate: e.target.value })} />
-                                </div>
-                                <div className="form-group">
-                                    <label>Check-out Date *</label>
-                                    <input type="date" required min={form.startDate || today} value={form.endDate}
-                                           onChange={(e) => setForm({ ...form, endDate: e.target.value })} />
-                                </div>
+                                <DatePicker
+                                    label="Check-in Date *"
+                                    value={form.startDate}
+                                    min={today}
+                                    onChange={(d) => setForm({ ...form, startDate: d, endDate: form.endDate && form.endDate < d ? d : form.endDate })}
+                                    placeholder="Select check-in…"
+                                />
+                                <DatePicker
+                                    label="Check-out Date *"
+                                    value={form.endDate}
+                                    min={form.startDate || today}
+                                    onChange={(d) => setForm({ ...form, endDate: d })}
+                                    placeholder="Select check-out…"
+                                />
                             </div>
 
                             {calcNights() > 0 && (
