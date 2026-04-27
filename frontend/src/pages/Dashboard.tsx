@@ -15,8 +15,8 @@ const Dashboard = () => {
                 api.get("/stays/active"),
                 api.get("/stays"),
             ]);
-            setActiveStays(activeRes.data);
-            setAllStays(allRes.data);
+            setActiveStays(Array.isArray(activeRes.data) ? activeRes.data : []);
+            setAllStays(Array.isArray(allRes.data)       ? allRes.data    : []);
         } finally {
             setLoading(false);
         }

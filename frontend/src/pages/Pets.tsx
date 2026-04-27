@@ -25,11 +25,13 @@ const Pets = () => {
 
     const fetchAll = async () => {
         const [pRes, oRes] = await Promise.all([api.get("/pets"), api.get("/owners")]);
-        setPets(pRes.data);
-        setFiltered(pRes.data);
-        setOwners(oRes.data);
-        if (oRes.data.length > 0 && form.ownerId === 0) {
-            setForm((f) => ({ ...f, ownerId: oRes.data[0].id }));
+        const petsData  = Array.isArray(pRes.data)  ? pRes.data  : [];
+        const ownersData = Array.isArray(oRes.data) ? oRes.data : [];
+        setPets(petsData);
+        setFiltered(petsData);
+        setOwners(ownersData);
+        if (ownersData.length > 0 && form.ownerId === 0) {
+            setForm((f) => ({ ...f, ownerId: ownersData[0].id }));
         }
     };
 

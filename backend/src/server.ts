@@ -1,9 +1,9 @@
 import app from "./app";
-import dotenv from "dotenv";
+import dotenv from "dotenv/config";
 import { seedServices } from "./services/service.service";
 import { seedRooms } from "./services/room.service";
 
-dotenv.config();
+
 
 const PORT = process.env.PORT || 5000;
 

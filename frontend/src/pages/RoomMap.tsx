@@ -70,7 +70,7 @@ export default function RoomMap() {
             const res = await api.get("/rooms/map", {
                 params: { startDate, endDate: endDate || startDate },
             });
-            setRooms(res.data);
+            setRooms(Array.isArray(res.data) ? res.data : []);
         } finally {
             setLoading(false);
         }

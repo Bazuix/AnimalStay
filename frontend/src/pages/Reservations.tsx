@@ -42,12 +42,16 @@ const Reservations = () => {
             api.get("/rooms"),
             api.get("/services"),
         ]);
-        setStays(sRes.data);
-        setPets(pRes.data);
-        setRooms(rRes.data);
-        setServices(svRes.data);
-        if (pRes.data.length > 0) setForm((f) => ({ ...f, petId: pRes.data[0].id }));
-        if (rRes.data.length > 0) setForm((f) => ({ ...f, roomId: rRes.data[0].id }));
+        const staysData    = Array.isArray(sRes.data)  ? sRes.data  : [];
+        const petsData     = Array.isArray(pRes.data)  ? pRes.data  : [];
+        const roomsData    = Array.isArray(rRes.data)  ? rRes.data  : [];
+        const servicesData = Array.isArray(svRes.data) ? svRes.data : [];
+        setStays(staysData);
+        setPets(petsData);
+        setRooms(roomsData);
+        setServices(servicesData);
+        if (petsData.length  > 0) setForm((f) => ({ ...f, petId:  petsData[0].id }));
+        if (roomsData.length > 0) setForm((f) => ({ ...f, roomId: roomsData[0].id }));
     };
 
     useEffect(() => { fetchAll(); }, []);
