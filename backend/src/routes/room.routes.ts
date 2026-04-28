@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { getRooms, createRoom, getRoomsWithStays } from "../controllers/room.controller";
-
+import {auth} from "../middleware/auth.middleware";
 const router = Router();
-router.get("/", getRooms);
-router.get("/map",  getRoomsWithStays);
-router.post("/", createRoom);
+router.get("/",auth, getRooms);
+router.get("/map",auth,  getRoomsWithStays);
+router.post("/",auth, createRoom);
 
 export default router;

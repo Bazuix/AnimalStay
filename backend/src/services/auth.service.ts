@@ -16,13 +16,27 @@ export const register = async (data: { email: string; password: string; role?: s
     return safe;
 };
 
-export const login = async ({ email, password }: {email:string;password:string}) => {
-    const user = await prisma.user.findUnique({ where: { email } });
+export const login = async (data: { email: string; password: string }) => {
+    const user = await prisma.user.findUnique({
+        where: { email: data.email }
+    });
 
-    if (!user) throw new Error("Brak użytkownika");
+    console.log("LOGIN ATTEMPT:", data.email);
+    console.log("USER FROM DB:", user);
 
-    const valid = await bcrypt.compare(password, user.password);
-    if (!valid) throw new Error("Złe hasło");
+    if (!user) throw new Error("User not found");
 
-    return jwt.sign({ id: user.id, role: user.role, email: user.email }, JWT_SECRET, { expiresIn: "24h" });
+    const valid = await bcrypt.compare(data.password, user.password);
+
+    console.log("PASSWORD VALID:", valid);
+
+    if (!valid) throw new Error("Wrong password");
+
+    const token = jwt.sign(
+        { id: user.id, role: user.role },
+        JWT_SECRET,
+        { expiresIn: "1d" }
+    );
+
+    return { token };
 };

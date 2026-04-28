@@ -11,10 +11,10 @@ export const register = async (req: Request, res: Response) => {
 };
 
 export const login = async (req: Request, res: Response) => {
-    try{
-        const token = await authService.login(req.body);
-        res.json({token});
-    }catch(e:any){
-        res.status(401).json({message:e.message});
+    try {
+        const { token } = await authService.login(req.body);
+        res.json({ token });
+    } catch (e: any) {
+        res.status(401).json({ message: e.message });
     }
 };

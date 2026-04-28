@@ -1,9 +1,12 @@
 import { Router } from "express";
-import { getAllOwners, createOwner } from "../controllers/owner.controller";
+import {getOwner, getAllOwners, createOwner, deleteOwner } from "../controllers/owner.controller";
+import {auth,authorize} from "../middleware/auth.middleware";
 
 const router = Router();
 
-router.get("/", getAllOwners);
-router.post("/", createOwner);
+router.get("/:id",auth, getOwner);
+router.get("/", auth,getAllOwners);
+router.post("/",auth, createOwner);
+router.delete("/:id",auth,authorize(["admin"]), deleteOwner);
 
 export default router;
