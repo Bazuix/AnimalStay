@@ -1,3 +1,6 @@
 import api from "./axios";
-export const login = (d: any) => api.post("/auth/login", d);
+
+export const login = (data: { email: string; password: string; }) => {
+    return api.post("/auth/login", data);
+};
 export const register = (d: any) => api.post("/auth/register", d);

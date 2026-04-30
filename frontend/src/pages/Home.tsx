@@ -1,12 +1,21 @@
 import { Link } from "react-router-dom";
+import heroBg from "../img/m_krohn-dogs-7275314.jpg";
 
 const Home = () => {
     return (
         <div className="home-page page-wrap">
             <div className="home-hero">
-                <div className="hero-paw">🐾</div>
-                <h1>Welcome to AnimalStay</h1>
-                <p>Professional hotel management system for your furry, feathered, and scaly guests.</p>
+                <div
+                    className="hero-bg"
+                    style={{
+                        backgroundImage: `url(${heroBg})`,
+                    }}
+                />
+                <div className="hero-content">
+                    <div className="hero-paw">🐾</div>
+                    <h1>Welcome to AnimalStay</h1>
+                    <p>Professional hotel management system for your furry, feathered, and scaly guests.</p>
+                </div>
             </div>
 
             <div className="home-cards grid-4">
