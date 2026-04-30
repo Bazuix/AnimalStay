@@ -59,7 +59,6 @@ a { text-decoration: none; color: inherit; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 3px; }
 
-// ── Utility ───────────────────────────────────────────────────────────────────
 
 .badge {
   display: inline-flex;
@@ -188,7 +187,6 @@ a { text-decoration: none; color: inherit; }
 .alert.error   { background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.3); color: var(--red); }
 .alert.success { background: rgba(62,207,142,0.1);  border: 1px solid rgba(62,207,142,0.3);  color: var(--green); }
 
-// ── Navbar ────────────────────────────────────────────────────────────────────
 
 .navbar {
   display: flex;
@@ -229,7 +227,6 @@ a { text-decoration: none; color: inherit; }
 .nav-link:hover  { color: var(--text); background: var(--bg3); }
 .nav-link.active { color: var(--text); background: var(--bg3); }
 
-// ── Login ─────────────────────────────────────────────────────────────────────
 
 .login-page {
   min-height: 100vh;
@@ -255,7 +252,6 @@ a { text-decoration: none; color: inherit; }
 
 .login-form { display: flex; flex-direction: column; gap: 16px; text-align: left; }
 
-// ── Home ──────────────────────────────────────────────────────────────────────
 
 .home-page { text-align: center; }
 
@@ -302,7 +298,6 @@ a { text-decoration: none; color: inherit; }
 .home-card h3            { font-size: 18px; margin-bottom: 8px; }
 .home-card p             { color: var(--muted); font-size: 14px; line-height: 1.5; }
 
-// ── Pets ──────────────────────────────────────────────────────────────────────
 
 .pet-card {
   padding: 20px;
@@ -316,7 +311,6 @@ a { text-decoration: none; color: inherit; }
 .pet-card .pet-info p         { font-size: 13px; color: var(--muted); margin-bottom: 2px; }
 .pet-card .pet-info .pet-owner { color: var(--accent); margin-top: 6px; }
 
-// ── Reservations ──────────────────────────────────────────────────────────────
 
 .stay-card { padding: 20px; }
 
@@ -394,7 +388,6 @@ a { text-decoration: none; color: inherit; }
 .service-chip.selected       { border-color: var(--accent2); background: rgba(124,106,247,0.1); }
 .service-chip .svc-price     { font-size: 11px; color: var(--muted); }
 
-// ── Dashboard ─────────────────────────────────────────────────────────────────
 
 .stats-row {
   display: grid;
@@ -464,7 +457,6 @@ a { text-decoration: none; color: inherit; }
 .dc-services  { display: flex; flex-wrap: wrap; gap: 4px; }
 .dc-notes     { font-size: 12px; color: var(--muted); }
 
-// ── Room Map ──────────────────────────────────────────────────────────────────
 
 .rm-filter-bar {
   padding: 20px 24px;
@@ -599,7 +591,6 @@ a { text-decoration: none; color: inherit; }
 
 .rm-detail-care { display: flex; flex-direction: column; gap: 10px; padding: 12px; background: var(--bg3); border-radius: 8px; margin-bottom: 10px; }
 
-// ── DatePicker ────────────────────────────────────────────────────────────────
 
 .dp-wrap { position: relative; display: flex; flex-direction: column; gap: 6px; }
 
@@ -733,7 +724,6 @@ a { text-decoration: none; color: inherit; }
 }
 .dp-clear-btn:hover { background: rgba(248,113,113,0.1); }
 
-// ── Responsive ────────────────────────────────────────────────────────────────
 
 @media (max-width: 900px) {
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
@@ -800,7 +790,6 @@ a { text-decoration: none; color: inherit; }
   .navbar-brand span:last-child { display: none; }
 }
 
-// ── Navbar mobile additions ───────────────────────────────────────────────────
 
 .navbar-right {
   display: flex;
@@ -810,7 +799,7 @@ a { text-decoration: none; color: inherit; }
 
 .logout-btn { white-space: nowrap; }
 
-// Hamburger button — hidden on desktop
+
 .hamburger {
   display: none;
   flex-direction: column;
@@ -834,12 +823,12 @@ a { text-decoration: none; color: inherit; }
   transition: all 0.25s ease;
   transform-origin: center;
 }
-// Animate to X when open
+
 .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-// Overlay behind drawer
+
 .mobile-overlay {
   display: none;
   position: fixed;
@@ -849,7 +838,7 @@ a { text-decoration: none; color: inherit; }
   animation: fadeIn 0.2s ease;
 }
 
-// Slide-in drawer
+
 .mobile-drawer {
   position: fixed;
   top: 0;
@@ -935,7 +924,7 @@ a { text-decoration: none; color: inherit; }
 }
 .mobile-logout:hover { background: rgba(248,113,113,0.15); }
 
-// Show hamburger + overlay on mobile
+
 @media (max-width: 768px) {
   .hamburger       { display: flex; }
   .logout-btn      { display: none; }
